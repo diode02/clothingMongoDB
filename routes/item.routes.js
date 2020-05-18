@@ -15,6 +15,32 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
+router.get("/getArayOfSepereteTypes", async (req, res, next) => {
+  try {
+    const collections = await Collection.find();
+    if (!collections) return res.status(404).send("not found");
+
+    const promises = collections.map(async (collection) => {
+      const result = {
+        _id: collection._id,
+        title: collection.title,
+        items: [],
+      };
+      const listOfItems = await Item.find({ itemType: collection._id });
+      result["items"] = listOfItems;
+      return result;
+    });
+
+    const collectionsWithItems = await Promise.all(promises); //waiting for promises to resolve
+
+    res.status(200).send(collectionsWithItems);
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).send(error);
+  }
+});
+
 router.post("/newItem/:type", async (req, res, next) => {
   try {
     const collection = await Collection.findOne({

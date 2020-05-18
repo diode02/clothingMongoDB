@@ -1,16 +1,30 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import "./directory.scss";
 import MenuItem from "../menuItem/menu-item.com";
 
-const Directory = ({ collections }) => {
+import { fetchCollectionStart } from "../../redux/directory/directory.actions";
+
+const Directory = ({ fetchCollectionStart, collections }) => {
+  useEffect(() => {
+    fetchCollectionStart();
+  }, [fetchCollectionStart]);
+
   return (
     <div className="directory-menu">
-      {collections.map(({ id, ...otherProps }) => (
-        <MenuItem key={id} {...otherProps}></MenuItem>
+      {collections.map(({ _id, ...otherProps }) => (
+        <MenuItem key={_id} {...otherProps}></MenuItem>
       ))}
     </div>
   );
 };
 
-export default Directory;
+const mapStateToProps = (state) => ({
+  collections: state.directory.collections,
+});
+
+const mapDispatchtoProps = (dispatch) => ({
+  fetchCollectionStart: () => dispatch(fetchCollectionStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Directory);

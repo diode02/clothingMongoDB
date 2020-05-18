@@ -3,22 +3,24 @@ const Collection = require("../src/models/collection/collection.models");
 const auth = require("../src/middlewares/auth");
 var router = express.Router();
 
-router.get("/:type", async (req, res, next) => {
+const { Item } = require("../src/models/items/items.models");
+
+router.get("/getAll", async (req, res, next) => {
   try {
-    const data = await Collection.findOne({
-      type: req.params.type.toLowerCase(),
-    });
-    if (!data) return res.status(404).send("not found");
+    const data = await Collection.find();
+    if (!data) return res.status(404).send("not ss found");
     res.status(200).send(data);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.get("/getAll", async (req, res, next) => {
+router.get("/:type", async (req, res, next) => {
   try {
-    const data = await Collection.find();
-    if (!data) return res.status(404).send("not found");
+    const data = await Collection.findOne({
+      type: req.params.type.toLowerCase(),
+    });
+    if (!data) return res.status(404).send("not type found");
     res.status(200).send(data);
   } catch (error) {
     res.status(500).send(error);
