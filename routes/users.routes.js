@@ -10,15 +10,17 @@ router.get("/", auth, async (req, res, next) => {
   res.status(200).send(req.user);
 });
 
-//sugnup
-router.post("/", async (req, res, next) => {
+//signup
+router.post("/signup", async (req, res, next) => {
   const user = new User(req.body);
   try {
     const data = await user.save();
     const token = await user.generateAuthToken();
     res.status(201).send({ data, token });
   } catch (error) {
-    res.status(401).send(error + "");
+    console.log(error);
+
+    res.status(401).send(error);
   }
 });
 
@@ -57,16 +59,20 @@ router.post("/login", async (req, res, next) => {
   try {
     const user = await User.checkCradentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
-    res.send({ user, token });
+    const modUser = {
+      name: user._doc.name,
+      email: user._doc.email,
+      token: token,
+    };
+    res.status(200).send(modUser);
   } catch (error) {
-    res.status(400).send(error + "");
+    console.log(error);
+
+    res.status(400).send(error);
   }
 });
-
 router.post("/logout", auth, async (req, res) => {
   try {
-    console.log("1");
-
     req.user.tokens = req.user.tokens.filter((tok) => tok.token !== req.token);
     await req.user.save();
     res.status(200).send("Logout Successfully");

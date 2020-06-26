@@ -7,7 +7,7 @@ var logger = require("morgan");
 require("./src/mongoDB/mongodb");
 
 var collectionsRouter = require("./routes/collections.routes");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/users.routes");
 var itemsRouter = require("./routes/item.routes");
 
 var cors = require("cors");

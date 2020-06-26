@@ -11,3 +11,8 @@ export const selectCollectionItems = (title) =>
     console.log();
     return items[0] ? items.filter((col) => col.title === title)[0].items : []; //geting items from whole db
   });
+
+export const selectIsCollectionsFetching = createSelector(
+  [selectShop],
+  (shop) => shop.isFetching
+);

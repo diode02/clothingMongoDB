@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import CollectionOverview from "../../components/collectionOverview/collection-overview.com";
-import CollectionPage from "../collection/collection-page.com";
+import CollectionOverViewContainer from "../../components/collectionOverview/collection-oveview.cont";
+import CollectionPageContainer from "../collection/collection-oveview.cont";
 import { fetchItemsStart } from "../../redux/shop/shop.actions";
 const ShopPage = ({ fetchItemsStart, match: { path } }) => {
   useEffect(() => {
@@ -10,11 +10,12 @@ const ShopPage = ({ fetchItemsStart, match: { path } }) => {
   });
   return (
     <div>
-      {console.log("here also 1")}
-      <Route exact path={`${path}`} component={CollectionOverview} />
-      {console.log("here also 2")}
-      <Route exact path={`${path}/:collectionID`} component={CollectionPage} />
-      {console.log("here also 3")}
+      <Route exact path={`${path}`} component={CollectionOverViewContainer} />
+      <Route
+        exact
+        path={`${path}/:collectionID`}
+        component={CollectionPageContainer}
+      />
     </div>
   );
 };

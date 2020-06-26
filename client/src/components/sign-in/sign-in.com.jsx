@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import FormInput from "../form-input/form-input.com";
 import CustomButton from "../custom-button/custom-button.com";
+import { emailSignInStart } from "../../redux/user/user.actions";
+import "./sign-in.sty.scss";
+import { createStructuredSelector } from "reselect";
+import { selectErrorMessage } from "../../redux/user/user.selector";
 
-const SignIn = ({}) => {
+const SignIn = ({ emailSignInStart, errorMessage }) => {
   const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
+    email: "qaskhan021@gmail.com",
+    password: "qweqweq",
   });
   const { email, password } = userCredentials;
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    emailSignInStart(userCredentials);
   };
 
   const handleChange = (event) => {
@@ -45,10 +50,25 @@ const SignIn = ({}) => {
           Sign in
         </CustomButton>
       </form>
+      <span
+        style={{
+          color: "red",
+          marginTop: "10px",
+        }}
+      >
+        {errorMessage ? "Please check your email and password" : ""}
+      </span>
     </div>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapStatetoProps = createStructuredSelector({
+  errorMessage: selectErrorMessage,
+});
 
-export default connect(null, mapDispatchToProps)(SignIn);
+const mapDispatchToProps = (dispatch) => ({
+  emailSignInStart: (userCredentials) =>
+    dispatch(emailSignInStart(userCredentials)),
+});
+
+export default connect(mapStatetoProps, mapDispatchToProps)(SignIn);
