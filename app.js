@@ -23,7 +23,15 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
+// app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/collections", collectionsRouter);
 app.use("/users", usersRouter);
