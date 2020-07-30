@@ -5,7 +5,6 @@ const uri4 =
 
 const uri3 = "mongodb://localhost:27017/clothing";
 
-const uri2 = "mongodb://a0e1168277c1.ngrok.io/clothing";
 mongoose.connect(uri4, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

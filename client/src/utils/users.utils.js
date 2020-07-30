@@ -1,6 +1,6 @@
 import axios from "axios";
 // import Cookie from "js-cookie";
-const url = "http://localhost:3000/users/";
+const url = "users/";
 
 export async function logOutAsync(token) {
   var config = {

@@ -1,9 +1,6 @@
 var express = require("express");
 const Collection = require("../src/models/collection/collection.models");
-const auth = require("../src/middlewares/auth");
 var router = express.Router();
-
-const { Item } = require("../src/models/items/items.models");
 
 router.get("/getAll", async (req, res, next) => {
   try {
