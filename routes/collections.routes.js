@@ -5,7 +5,7 @@ var router = express.Router();
 router.get("/getAll", async (req, res, next) => {
   try {
     const data = await Collection.find();
-    if (!data) return res.status(404).send("not ss found");
+    if (!data) return res.status(404).send("not found");
     res.status(200).send(data);
   } catch (error) {
     res.status(500).send(error);
