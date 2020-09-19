@@ -11,10 +11,10 @@ import { createStructuredSelector } from "reselect";
 import { signUpStart } from "../../redux/user/user.actions";
 function SignUp({ signUpStart, errorSignUp }) {
   const [userCredentials, setUserCredetials] = useState({
-    displayName: "w",
-    email: "waqaskhanws2@gmail.com",
-    password: "khankhan",
-    confirmPassword: "khankhan",
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [message, setmessage] = useState("");
