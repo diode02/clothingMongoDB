@@ -89,9 +89,8 @@ function SignUp({ signUpStart, errorMessage }) {
           Sign Up
         </CustomButton>
       </form>
-      {errorMessage && errorMessage.error.code === 11000
-        ? "Email address is already in use"
-        : ""}
+      {/* && errorMessage.error.code === 11000 */}
+      {errorMessage ? "Email address is already in use" : ""}
     </div>
   );
 }
