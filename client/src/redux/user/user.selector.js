@@ -11,3 +11,8 @@ export const selectErrorMessage = createSelector(
   [selectUser],
   (user) => user.error
 );
+
+export const selectErrorSignUp = createSelector(
+  [selectUser],
+  (user) => user.errorSignUp
+);

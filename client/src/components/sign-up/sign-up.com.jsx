@@ -5,17 +5,19 @@ import { Redirect } from "react-router";
 import FormInput from "../form-input/form-input.com";
 import "./sign-up.sty.scss";
 import CustomButton from "../custom-button/custom-button.com";
-import { selectErrorMessage } from "../../redux/user/user.selector";
+import { selectErrorSignUp } from "../../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 
 import { signUpStart } from "../../redux/user/user.actions";
-function SignUp({ signUpStart, errorMessage }) {
+function SignUp({ signUpStart, errorSignUp }) {
   const [userCredentials, setUserCredetials] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    displayName: "w",
+    email: "waqaskhanws2@gmail.com",
+    password: "khankhan",
+    confirmPassword: "khankhan",
   });
+
+  const [message, setmessage] = useState("");
 
   const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -40,7 +42,7 @@ function SignUp({ signUpStart, errorMessage }) {
       return;
     }
 
-    await signUpStart(email, password, displayName);
+    signUpStart(email, password, displayName);
   };
 
   const onChange = ({ target }) => {
@@ -89,14 +91,15 @@ function SignUp({ signUpStart, errorMessage }) {
           Sign Up
         </CustomButton>
       </form>
+      {message}
       {/* && errorMessage.error.code === 11000 */}
-      {errorMessage ? "Email address is already in use" : ""}
+      {errorSignUp ? "Email address is already in use" : ""}
     </div>
   );
 }
 
 const mapStatetoProps = createStructuredSelector({
-  errorMessage: selectErrorMessage,
+  errorSignUp: selectErrorSignUp,
 });
 
 const mapDispatchToProps = (dispatch) => ({
