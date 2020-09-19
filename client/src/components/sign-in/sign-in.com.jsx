@@ -9,8 +9,8 @@ import { selectErrorMessage } from "../../redux/user/user.selector";
 
 const SignIn = ({ emailSignInStart, errorMessage }) => {
   const [userCredentials, setUserCredentials] = useState({
-    email: "qaskhan021@gmail.com",
-    password: "qweqweq",
+    email: "",
+    password: "",
   });
   const { email, password } = userCredentials;
 
@@ -20,7 +20,6 @@ const SignIn = ({ emailSignInStart, errorMessage }) => {
   };
 
   const handleChange = (event) => {
-    event.preventDefault();
     const { name, value } = event.target;
     setUserCredentials({ ...userCredentials, [name]: value });
   };
@@ -56,7 +55,9 @@ const SignIn = ({ emailSignInStart, errorMessage }) => {
           marginTop: "10px",
         }}
       >
-        {errorMessage ? "Please check your email and password" : ""}
+        {errorMessage === "Request failed with status code 400"
+          ? "Please check your email and password"
+          : ""}
       </span>
     </div>
   );

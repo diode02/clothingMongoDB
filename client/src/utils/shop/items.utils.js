@@ -7,11 +7,7 @@ async function getItems() {
       return response.data;
     },
     (error) => {
-      var status = error.response.status;
-      if (status === 401) {
-        return status;
-      }
-      console.log(status);
+      throw error;
     }
   );
   return data;

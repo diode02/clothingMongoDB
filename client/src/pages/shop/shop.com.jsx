@@ -20,7 +20,7 @@ const ShopPage = ({ fetchItemsStart, match: { path } }) => {
   );
 };
 
-const mapDispatchtoProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchItemsStart: () => dispatch(fetchItemsStart()),
 });
-export default connect(null, mapDispatchtoProps)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);

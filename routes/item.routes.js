@@ -15,7 +15,7 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
-router.get("/getArayOfSepereteTypes", async (req, res, next) => {
+router.get("/getArayOfSepereteTypes/", async (req, res, next) => {
   try {
     const collections = await Collection.find();
     if (!collections) return res.status(404).send("not found");

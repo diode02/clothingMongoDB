@@ -70,10 +70,10 @@ export function* signUp({ payload: { email, password, displayName } }) {
       password,
       name: displayName,
     });
-    console.log(user);
 
     yield put(signUpSucess(user));
   } catch (error) {
+    console.log(error);
     yield put(signUpFailure(error));
   }
 }

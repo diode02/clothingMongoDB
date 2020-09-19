@@ -33,6 +33,7 @@
   height: 100%;
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .menu-item .content {
   height: 90px;

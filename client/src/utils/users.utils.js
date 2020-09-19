@@ -12,7 +12,7 @@ export async function logOutAsync(token) {
   };
 
   const data = axios
-    .post(url + "/logout", bodyParameters, config)
+    .post(url + "logout", bodyParameters, config)
     .then((response) => {
       console.log(response);
       return true;
@@ -112,13 +112,11 @@ export async function createUserWithEmailAndPassword(userData) {
     data: userData,
   })
     .then((response) => {
-      //   Cookie.set("token", response.data.token);
       console.log("success" + response.data.data);
       return response.data.data;
     })
     .catch((error) => {
-      console.log("not created " + error);
-      return error;
+      throw error.response.data;
     });
   return response;
 }

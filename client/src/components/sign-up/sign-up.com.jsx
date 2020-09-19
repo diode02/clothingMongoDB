@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import { Redirect } from "react-router";
+
 import FormInput from "../form-input/form-input.com";
 import "./sign-up.sty.scss";
 import CustomButton from "../custom-button/custom-button.com";
+import { selectErrorMessage } from "../../redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 import { signUpStart } from "../../redux/user/user.actions";
-function SignUp({ signUpStart }) {
+function SignUp({ signUpStart, errorMessage }) {
   const [userCredentials, setUserCredetials] = useState({
     displayName: "",
     email: "",
@@ -13,12 +17,23 @@ function SignUp({ signUpStart }) {
     confirmPassword: "",
   });
 
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
+
   const { displayName, password, confirmPassword, email } = userCredentials;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { displayName, email, password, confirmPassword } = userCredentials;
+
+    if (password.length < 7) {
+      alert("passowrd length must be greater then 7");
+      return;
+    }
 
     if (password !== confirmPassword) {
       alert("passowrd dont match");
@@ -74,12 +89,19 @@ function SignUp({ signUpStart }) {
           Sign Up
         </CustomButton>
       </form>
+      {errorMessage && errorMessage.error.code === 11000
+        ? "Email address is already in use"
+        : ""}
     </div>
   );
 }
+
+const mapStatetoProps = createStructuredSelector({
+  errorMessage: selectErrorMessage,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   signUpStart: (email, password, displayName) =>
     dispatch(signUpStart({ email, password, displayName })),
 });
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStatetoProps, mapDispatchToProps)(SignUp);

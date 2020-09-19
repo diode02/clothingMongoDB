@@ -76,7 +76,10 @@ userSchema.methods.toJSON = function () {
 };
 
 userSchema.methods.generateAuthToken = async function () {
-  const token = jwt.sign({ _id: this._id.toString() }, "gonnachangit");
+  const token = jwt.sign(
+    { _id: this._id.toString() },
+    process.env.JWT_SECRET_KEY
+  );
   this.tokens = this.tokens.concat({ token });
   await this.save();
   return token;
@@ -100,7 +103,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.pre("remove", async function (next) {
-  //   await Task.deleteMany({ owner: this._id });
+  // await Task.deleteMany({ owner: this._id });
   console.log("deleted");
   next();
 });

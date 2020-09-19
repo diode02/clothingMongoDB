@@ -9,6 +9,7 @@ require("./src/mongoDB/mongodb");
 var collectionsRouter = require("./routes/collections.routes");
 var usersRouter = require("./routes/users.routes");
 var itemsRouter = require("./routes/item.routes");
+var paymentsRouter = require("./routes/payment.routes");
 
 var cors = require("cors");
 
@@ -29,6 +30,8 @@ app.use(cookieParser());
 app.use("/collections", collectionsRouter);
 app.use("/users", usersRouter);
 app.use("/items", itemsRouter);
+app.use("/shop/items", itemsRouter);
+app.use("/payments", paymentsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
