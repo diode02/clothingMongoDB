@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 //components
@@ -10,6 +10,9 @@ import SignInSignUp from "./pages/sign-in-sign-up/sign-in-sign-up.com";
 import HomePageRedirectCom from "./pages/homepage/homePageRedirect-com";
 
 function App() {
+  useEffect(() => {
+    document.title = "Diodes Outfit";
+  }, []);
   return (
     <div className="App">
       <Header />
