@@ -26,9 +26,7 @@ router.get("/getArayOfSepereteTypes/", async (req, res, next) => {
         title: collection.title,
         items: [],
       };
-      console.log(collection._id);
       const listOfItems = await Item.find({ itemType: collection._id });
-      console.log(listOfItems);
       result["items"] = listOfItems;
       return result;
     });
