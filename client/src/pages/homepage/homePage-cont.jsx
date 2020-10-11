@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectIsDirectoryFetching } from "../../redux/directory/shop.selectors";
 
