@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URL_KEY, {
+mongoose.connect("mongodb://localhost/clothing", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

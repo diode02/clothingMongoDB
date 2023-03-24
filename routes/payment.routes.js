@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")("sk_test_51HT8IVHye9tS9SYFD5AXDo4OeYEKefB1jTA4jciDnAjqiBFWQgphkiEyr5bKmqpfUnJwN2xQZRmqCStRypO2ibgq00F1dCbLsB");
 
 /* GET users listing. */
 router.post("/", function (req, res, next) {
